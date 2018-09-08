@@ -29,6 +29,9 @@ class PlayState extends BasicState
 	
 	public var ingredients : AdministratedList<Draggable>;
 
+	public var recipes : AdministratedList<Recipe>;
+
+	private var testRecipe:Recipe;
 	
 	
 	/**
@@ -45,11 +48,14 @@ class PlayState extends BasicState
 		
 		var i : Draggable = new Draggable(300, 300, this);
 		ingredients.add(i);
-		
+
+		recipes = new AdministratedList<Recipe>();
 		var testIngredient = new PlacedIngredient(IngredientType.BUN);
 		var testIngredientsList = new Array<IngredientType>();
 		testIngredientsList.push(IngredientType.BUN);
-		var testRecipe = new Recipe(testIngredientsList);
+		testRecipe = new Recipe(testIngredientsList);
+		recipes.add(testRecipe);
+		testRecipe.startRecipe(10, 10);
 	}
 
 	
@@ -86,6 +92,7 @@ class PlayState extends BasicState
 		MyInput.update();
 		player.update(elapsed);
 		ingredients.update(elapsed);
+		recipes.update(elapsed);
 	}	
 
 }
