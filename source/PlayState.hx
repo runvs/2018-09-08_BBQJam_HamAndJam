@@ -193,8 +193,9 @@ class PlayState extends BasicState
 		recipes.update(elapsed);
 		happy.update(elapsed);
 		
-		if (happy.counter >= 3)
-			EndGame();
+
+		//if (happy.counter >= 3)
+			//EndGame();
 
 	}	
 	
@@ -226,26 +227,20 @@ class PlayState extends BasicState
 		{
 			idx = 1;
 		}
-		else if (zeroBurgerSlots <= 2)
+		
+		if (FlxG.random.bool())
 		{
-			if (idx == 1 && FlxG.random.bool())
-			{
-				idx == 0;
-			}
+			idx = FlxG.random.int(0, arr.length - 1);
 		}
-		else if (zeroBurgerSlots == 0)
-		{
-			if (idx == 1)
-			{
-				idx = FlxG.random.int(0, arr.length - 1, [1]);
-			}
-		}
+		
+		trace(idx);
 		
 		
 		var i : IngredientDraggable = new IngredientDraggable( -100, 240, this, arr[idx]);
-		trace(ingredients.length());
+		trace(arr[idx]);
+		//trace(ingredients.length());
 		ingredients.add(i) ;
-		trace(ingredients.length());
+		//trace(ingredients.length());
 	}
 
 }

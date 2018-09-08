@@ -77,7 +77,6 @@ class BurgerSlot extends Draggable
 			_state.checkBurgerOk(this);
 			recipe.ingredients = recipe.createRecipe();
 			recipe.loadMyGraphics();
-			
 		}
 		else
 		{

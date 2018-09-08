@@ -225,7 +225,7 @@ class Recipe extends FlxSprite
 
 	public function createRecipe()
 	{
-		maxTime = FlxG.random.float(30, 40);
+		maxTime = FlxG.random.float(60, 80);
 		var recArr : Array<IngredientType> = new Array<IngredientType>();
 		recArr.push(IngredientType.BUN_BOT);
 		var sauceAdded : Bool = false;
