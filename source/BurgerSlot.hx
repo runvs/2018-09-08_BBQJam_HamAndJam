@@ -13,4 +13,9 @@ class BurgerSlot extends Draggable
 		this.makeGraphic(64, 64);
 	}
 	
+	public function addIngredientToStack (it: IngredientType)
+	{
+		// todo
+	}
+	
 }

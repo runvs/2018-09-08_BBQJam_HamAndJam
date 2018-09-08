@@ -5,8 +5,10 @@ package;
  */
 enum IngredientType 
 {
-	BUN;
+	BUN_TOP;
+	BUN_BOT;
 	MEAT;
 	SALAD;
-	TOMATO;	
+	CHEESE;	
+	SAUCE;
 }

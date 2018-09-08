@@ -31,6 +31,9 @@ class PlayState extends BasicState
 	public var burgerSlots : AdministratedList<BurgerSlot>;
 
 	
+	private static var DefaultIngredientSpawnTimer : Float = 1.5;
+	private var IngredientSpawnTimer : Float = 0;
+	
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -44,8 +47,8 @@ class PlayState extends BasicState
 		player = new Player();
 		ingredients = new AdministratedList<IngredientDraggable>();
 		
-		var i : IngredientDraggable = new IngredientDraggable(300, 300, this, IngredientType.SALAD);
-		ingredients.add(i);
+		//var i : IngredientDraggable = new IngredientDraggable(300, 300, this, IngredientType.SALAD);
+		//ingredients.add(i);
 		add(ingredients);
 		
 
@@ -55,9 +58,9 @@ class PlayState extends BasicState
 		add(burgerSlots);
 		
 
-		var testIngredient = new PlacedIngredient(IngredientType.BUN);
+		var testIngredient = new PlacedIngredient(IngredientType.SALAD);
 		var testIngredientsList = new Array<IngredientType>();
-		testIngredientsList.push(IngredientType.BUN);
+		testIngredientsList.push(IngredientType.SALAD);
 		var testRecipe = new Recipe(testIngredientsList);
 
 	}
@@ -93,10 +96,29 @@ class PlayState extends BasicState
 		super.update(elapsed);
 		MyInput.update();
 		player.update(elapsed);
-		//trace(ingredients.getList().members[0].active);
-		//ingredients.update(elapsed);
-		trace(ingredients.length());
-		//burgerSlots.update(elapsed);
+
+		//trace(ingredients.length());
+		if (ingredients.length() != 0)
+			trace(ingredients.getList().members[0].x);
+		
+		IngredientSpawnTimer -= elapsed;
+		if (IngredientSpawnTimer <= 0)
+		{
+			IngredientSpawnTimer = DefaultIngredientSpawnTimer;
+			SpawnIngredient();
+		}
 	}	
+	
+	function SpawnIngredient() 
+	{
+		trace("spawn");
+		var arr :Array<IngredientType> = IngredientType.createAll();
+		var idx : Int = FlxG.random.int(0, arr.length);
+		
+		var i : IngredientDraggable = new IngredientDraggable( 0, 300, this, arr[idx]);
+		trace(ingredients.length());
+		ingredients.add(i) ;
+		trace(ingredients.length());
+	}
 
 }

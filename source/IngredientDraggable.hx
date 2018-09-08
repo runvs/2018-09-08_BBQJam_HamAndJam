@@ -1,5 +1,6 @@
 package;
 import flixel.FlxG;
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 
 /**
@@ -9,13 +10,20 @@ import flixel.util.FlxColor;
 class IngredientDraggable extends Draggable 
 {
 	public var myType : IngredientType;
+	
+	public var shouldBePosition : FlxPoint;
+	public var age : Float = 0;
+	
+	public static var beltSpeed : Float = 50;
 
 	public function new(?X:Float=0, ?Y:Float=0, s:PlayState, it : IngredientType) 
 	{
 		super(X, Y, s);
 		myType = it;
 		TypeToGraphc();
+		shouldBePosition = new FlxPoint( -100, 300);
 	}
+	
 	
 	function TypeToGraphc() 
 	{
@@ -25,6 +33,20 @@ class IngredientDraggable extends Draggable
 		}
 	}
 	
+	override public function update(elapsed:Float):Void 
+	{
+		super.update(elapsed);
+		age += elapsed;
+		
+		
+		if (!lifted && canBeLifted)
+		{
+			x += beltSpeed * elapsed;
+		}
+	}
+	
+	
+	
 	override function onDrop() 
 	{
 		super.onDrop();
@@ -33,10 +55,9 @@ class IngredientDraggable extends Draggable
 			var bs : BurgerSlot = bsi;
 			if (FlxG.overlap(bs, this))
 			{
-				trace("deactivate");
-				//trace(active);
+				bs.addIngredientToStack(this.myType);
 				active = false;
-				//trace(active);
+				
 			}
 			
 			

@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.tweens.FlxTween;
 
 /**
  * ...
@@ -78,7 +79,8 @@ class Draggable extends FlxSprite
 			{
 				lifted = false;
 				onDrop();
-				// todo return to pickup point
+				canBeLifted = false;
+				FlxTween.tween(this, {x : pickupPoint.x, y: pickupPoint.y}, 0.6, { onComplete: function(t) {canBeLifted = true; } });
 			}
 		}
 	}
