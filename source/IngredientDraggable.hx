@@ -1,4 +1,5 @@
 package;
+import flixel.util.FlxColor;
 
 /**
  * ...
@@ -12,6 +13,15 @@ class IngredientDraggable extends Draggable
 	{
 		super(X, Y, s);
 		myType = it;
+		TypeToGraphc();
+	}
+	
+	function TypeToGraphc() 
+	{
+		if (myType == IngredientType.SALAD)
+		{
+			this.makeGraphic(64, 64, FlxColor.GREEN);
+		}
 	}
 	
 }

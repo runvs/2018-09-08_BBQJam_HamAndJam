@@ -18,24 +18,35 @@ class Draggable extends FlxSprite
 	private var pickupOffset : FlxPoint;
 	
 	private var _state : PlayState;
+	
+	public var pickupCallbacks : Array< Void -> Void>;
+	public var dropCallbacks : Array< Void -> Void>;
 
 	public function new(?X:Float=0, ?Y:Float=0, s: PlayState) 
 	{
 		super();
 		_state = s;
-		this.makeGraphic(64, 64);
+		//this.makeGraphic(64, 64);
 		pickupPoint = new FlxPoint(0, 0);
+		pickupCallbacks = new Array<Void -> Void>();
+		dropCallbacks = new Array<Void -> Void>();
 	}
 	
 	
 	private function onPickup()
 	{
-		
+		for (cb in pickupCallbacks)
+		{
+			cb();
+		}
 	}
 	
 	private function onDrop()
 	{
-		
+		for (cb in dropCallbacks)
+		{
+			cb();
+		}
 	}
 	
 	override public function update(elapsed:Float):Void 

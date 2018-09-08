@@ -27,7 +27,8 @@ class PlayState extends BasicState
 	
 	public var player : Player;
 	
-	public var ingredients : AdministratedList<Draggable>;
+	public var ingredients : AdministratedList<IngredientDraggable>;
+	public var burgerSlots : AdministratedList<BurgerSlot>;
 
 	
 	
@@ -41,10 +42,14 @@ class PlayState extends BasicState
 		trace("playstate create begin");
 		
 		player = new Player();
-		ingredients = new AdministratedList<Draggable>();
+		ingredients = new AdministratedList<IngredientDraggable>();
 		
-		var i : Draggable = new Draggable(300, 300, this);
+		var i : IngredientDraggable = new IngredientDraggable(300, 300, this, IngredientType.SALAD);
 		ingredients.add(i);
+		
+		burgerSlots = new AdministratedList<BurgerSlot>();
+		var bs : BurgerSlot = new BurgerSlot(300, 500, this);
+		burgerSlots.add(bs);
 		
 	}
 
@@ -64,12 +69,11 @@ class PlayState extends BasicState
 		super.drawObjects();
 		player.draw();
 		ingredients.draw();
-		
+		burgerSlots.draw();
 	}
 	
 	override public function drawOverlay():Void 
 	{
-		
 		
 	}
 	
@@ -82,6 +86,7 @@ class PlayState extends BasicState
 		MyInput.update();
 		player.update(elapsed);
 		ingredients.update(elapsed);
+		burgerSlots.update(elapsed);
 	}	
 
 }
