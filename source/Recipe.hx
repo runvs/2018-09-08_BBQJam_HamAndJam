@@ -7,6 +7,15 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
  * ...
  * @author ...
  */
+
+enum BurgerStatus {
+	ERROR; // returned e.g. when the burger is not actually finished yet
+	FINISHED_IN_ORDER; // finished with the ingredients in the right order
+	FINISHED_WRONG_ORDER; // finished with the ingredients in the wrong order
+	FAILED_TOO_FEW; // finished with too few ingredients
+	FAILED_WRONG_INGREDIENT; // finished with wrong ingredients
+}
+
 class Recipe extends FlxSprite 
 {
 	public var ingredients : Array<IngredientType> = new Array<IngredientType>();
@@ -58,5 +67,66 @@ class Recipe extends FlxSprite
 	public function getRequiredIngredients()
 	{
 		return ingredients.copy();
+	}
+
+	/*
+	 * This function will return the BurgerStatus and should only be used when the top bun is on the burger
+	 */
+	public function getIngredientsFinished(proposedIngredients:Array<PlacedIngredient>)
+	{
+		if (proposedIngredients[-1].getID() != IngredientType.BUN_TOP)
+		{
+			trace("checking unfinished burger!");
+			return BurgerStatus.ERROR;
+		}
+		// assume the best
+		var currentState = BurgerStatus.FINISHED_IN_ORDER;
+		// get ingredient IDs from proposedIngredients array
+		var proposedIngredientIDs:Array<IngredientType> = new Array<IngredientType>();
+		for (elem in proposedIngredients)
+		{
+			proposedIngredientIDs.push(elem.getID());
+		}
+		// next, check if the bottom patty has been added
+		if (proposedIngredientIDs[0] != IngredientType.BUN_BOT)
+		{
+			return BurgerStatus.FAILED_WRONG_INGREDIENT;
+		}
+		// next, check for ingredients (first generally, then if they are in order)
+		for (i in 1...proposedIngredientIDs.length)
+		{
+			if (i == ingredients.length)
+			{
+				// content part finished
+				if (ingredients.length == proposedIngredientIDs.length)
+				{
+					// burger size is OK, go to final status
+					break;
+				}
+				else
+				{
+					//burger too small => ingredients missing
+					return BurgerStatus.FAILED_TOO_FEW;
+				}
+			}
+			if (ingredients.indexOf(proposedIngredientIDs[i]) != -1)
+			{
+				// check if ingredient is in the wrong place
+				if (proposedIngredientIDs[i] != ingredients[i])
+				{
+					// ingredient in the wrong place
+					// check if already failed anyway, which would be worse
+					if (currentState != BurgerStatus.FAILED_WRONG_INGREDIENT)
+					{
+						currentState = BurgerStatus.FINISHED_WRONG_ORDER;
+					}
+				}
+			}
+			else
+			{
+				currentState = BurgerStatus.FAILED_WRONG_INGREDIENT;
+			}
+		}
+		return currentState;
 	}
 }
