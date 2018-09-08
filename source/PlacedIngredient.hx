@@ -19,7 +19,7 @@ class PlacedIngredient extends FlxSprite
 		TypeToGraphic();
 	}
 	
-	public function getID()
+	public function getID()  : IngredientType
 	{
 		return IngredientID;
 	}

@@ -82,8 +82,11 @@ class IngredientDraggable extends Draggable
 			var bs : BurgerSlot = bsi;
 			if (FlxG.overlap(bs, this))
 			{
-				bs.addIngredientToStack(this.myType);
-				active = false;
+				if (bs.checkCanPlace(this.myType))
+				{
+					bs.addIngredientToStack(this.myType);
+					active = false;
+				}
 				
 			}
 			
