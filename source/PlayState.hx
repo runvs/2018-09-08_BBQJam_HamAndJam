@@ -43,7 +43,7 @@ class PlayState extends BasicState
 		player = new Player();
 		ingredients = new AdministratedList<Draggable>();
 		
-		var i : Draggable = new Draggable(300, 300);
+		var i : Draggable = new Draggable(300, 300, this);
 		ingredients.add(i);
 		
 	}
