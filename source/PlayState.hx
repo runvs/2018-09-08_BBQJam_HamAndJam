@@ -46,6 +46,10 @@ class PlayState extends BasicState
 		var i : Draggable = new Draggable(300, 300, this);
 		ingredients.add(i);
 		
+		var testIngredient = new PlacedIngredient(IngredientType.BUN);
+		var testIngredientsList = new Array<IngredientType>();
+		testIngredientsList.push(IngredientType.BUN);
+		var testRecipe = new Recipe(testIngredientsList);
 	}
 
 	
