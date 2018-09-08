@@ -56,10 +56,23 @@ class PlayState extends BasicState
 
 
 		burgerSlots = new AdministratedList<BurgerSlot>();
-		var bs : BurgerSlot = new BurgerSlot(300, 500, this);
-		burgerSlots.add(bs);
+		{
+			var bs1 : BurgerSlot = new BurgerSlot(200, 600, this);
+			burgerSlots.add(bs1);
+		}
+		{
+			var bs : BurgerSlot = new BurgerSlot(400, 600, this);
+			burgerSlots.add(bs);
+		}
+		{
+			var bs : BurgerSlot = new BurgerSlot(600, 600, this);
+			burgerSlots.add(bs);
+		}
+		{
+			var bs : BurgerSlot = new BurgerSlot(800, 600, this);
+			burgerSlots.add(bs);
+		}
 		add(burgerSlots);
-		
 
 		var testIngredient = new PlacedIngredient(IngredientType.SALAD);
 		var testIngredientsList = new Array<IngredientType>();

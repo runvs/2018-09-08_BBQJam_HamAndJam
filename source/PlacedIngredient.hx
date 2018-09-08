@@ -16,10 +16,43 @@ class PlacedIngredient extends FlxSprite
 	{
 		super(X, Y, SimpleGraphic);
 		IngredientID = ingrID;
+		TypeToGraphic();
 	}
 	
 	public function getID()
 	{
 		return IngredientID;
+	}
+	
+	private function TypeToGraphic()
+	{
+		if (IngredientID == IngredientType.BUN_TOP)
+		{
+			this.loadGraphic(AssetPaths.bread_top_front__png, false);
+		}
+		else if (IngredientID == IngredientType.BUN_BOT)
+		{
+			this.loadGraphic(AssetPaths.bread_bottom_front__png, false);
+		}
+		else if (IngredientID == IngredientType.SALAD)
+		{
+			this.loadGraphic(AssetPaths.salad_front__png, false);
+		}
+		else if (IngredientID == IngredientType.MEAT)
+		{
+			this.loadGraphic(AssetPaths.meat_front__png, false);
+		}
+		else if (IngredientID == IngredientType.SAUCE)
+		{
+			this.loadGraphic(AssetPaths.sauce__png, false);
+		}
+		else if (IngredientID == IngredientType.CHEESE)
+		{
+			this.loadGraphic(AssetPaths.cheese_front__png, false);
+		}
+		else
+		{
+			trace("WARNING: Unknown type: " + IngredientID );
+		}
 	}
 }
