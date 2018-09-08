@@ -36,6 +36,7 @@ class PlacedIngredient extends FlxSprite
 		}
 		else if (IngredientID == IngredientType.SALAD)
 		{
+			trace("load salad");
 			this.loadGraphic(AssetPaths.salad_front__png, false);
 		}
 		else if (IngredientID == IngredientType.MEAT)

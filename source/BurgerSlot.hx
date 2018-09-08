@@ -10,9 +10,11 @@ import flixel.group.FlxSpriteGroup;
 class BurgerSlot extends Draggable 
 {
 	private var ingredients : FlxTypedGroup<PlacedIngredient>;
-	private static var IngredientOffset : Float = 15;
+	public static var IngredientOffset : Float = 15;
 	
 	public var counter : Int = 0;
+	
+	public var recipe : Recipe = null;
 
 	public function new(?X:Float=0, ?Y:Float=0, s:PlayState) 
 	{

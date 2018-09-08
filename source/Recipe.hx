@@ -1,7 +1,9 @@
 package;
 
 import flixel.FlxSprite;
+import flixel.group.FlxSpriteGroup;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.util.FlxColor;
 
 /**
  * ...
@@ -20,6 +22,9 @@ class Recipe extends FlxSprite
 {
 	public var ingredients : Array<IngredientType> = new Array<IngredientType>();
 	// the time when the player officially starts working on the recipe; before, it is null
+	
+	private var recipeGraphics : FlxSpriteGroup;
+	
 	public var recipeStarted : Bool = false;
 	// the time the player has to complete the recipe in seconds
 	public var recipeTime : Float;
@@ -33,12 +38,49 @@ class Recipe extends FlxSprite
 		ingredients = IngredientArray;
 		points = rewardPoints;
 		recipeTime = maxRecipeTime;
+		this.makeGraphic(100, 100, FlxColor.MAGENTA);
+		
+		recipeGraphics = new FlxSpriteGroup();
+		
+	}
+	
+	function loadMyGraphics() 
+	{
+		trace(ingredients.length);
+		var counter : Int = 0;
+		
+		for ( it in ingredients)
+		{
+			trace(it);
+			if (it == IngredientType.SAUCE)
+			{
+				var i : PlacedIngredient = new PlacedIngredient(it, x, y );
+				i.offset.set( - this.width, -( this.height -82));
+				recipeGraphics.add(i);
+			}
+			else if (it == IngredientType.BUN_TOP)
+			{
+				counter += 1;
+				var i : PlacedIngredient = new PlacedIngredient(it, x, y );
+				i.offset.set(0, -( this.height - (counter * BurgerSlot.IngredientOffset) -8));
+				recipeGraphics.add(i);
+			}
+			else
+			{
+				counter += 1;
+				var i : PlacedIngredient = new PlacedIngredient(it, x, y );
+				i.offset.set(0, -( this.height - counter * BurgerSlot.IngredientOffset ));
+				recipeGraphics.add(i);
+			}
+			trace(recipeGraphics.members[0].x + " " + recipeGraphics.members[0].y);
+		}
 	}
 
 	public function startRecipe(posX:Int, posY:Int)
 	{
 		recipeStarted = true;
 		this.setPosition(posX, posY);
+		loadMyGraphics();
 	}
 
 	override public function update(elapsed:Float)
@@ -47,6 +89,7 @@ class Recipe extends FlxSprite
 		{
 			elapsedTime+=elapsed;
 		}
+		recipeGraphics.update(elapsed);
 	}
 
 	/*
@@ -128,5 +171,11 @@ class Recipe extends FlxSprite
 			}
 		}
 		return currentState;
+	}
+	
+	override public function draw():Void 
+	{
+		super.draw();
+		recipeGraphics.draw();
 	}
 }

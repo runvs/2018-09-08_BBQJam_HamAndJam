@@ -71,19 +71,19 @@ class PlayState extends BasicState
 
 		burgerSlots = new AdministratedList<BurgerSlot>();
 		{
-			var bs1 : BurgerSlot = new BurgerSlot(100, 600, this);
+			var bs1 : BurgerSlot = new BurgerSlot(100, 400, this);
 			burgerSlots.add(bs1);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(300, 600, this);
+			var bs : BurgerSlot = new BurgerSlot(300, 400, this);
 			burgerSlots.add(bs);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(500, 600, this);
+			var bs : BurgerSlot = new BurgerSlot(500, 400, this);
 			burgerSlots.add(bs);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(700, 600, this);
+			var bs : BurgerSlot = new BurgerSlot(700, 400, this);
 			burgerSlots.add(bs);
 		}
 		add(burgerSlots);
@@ -95,12 +95,49 @@ class PlayState extends BasicState
 
 
 		recipes = new AdministratedList<Recipe>();
-		var testIngredient = new PlacedIngredient(IngredientType.SALAD);
-		var testIngredientsList = new Array<IngredientType>();
-		testIngredientsList.push(IngredientType.SALAD);
-		testRecipe = new Recipe(testIngredientsList);
-		recipes.add(testRecipe);
-		testRecipe.startRecipe(10, 10);
+		{
+			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
+			var testIngredientsList = new Array<IngredientType>();
+			testIngredientsList.push(IngredientType.SALAD);
+			testRecipe = new Recipe(testIngredientsList);
+			recipes.add(testRecipe);
+			testRecipe.startRecipe(100, 600);
+		}
+		{
+			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
+			var testIngredientsList = new Array<IngredientType>();
+			testIngredientsList.push(IngredientType.SALAD);
+			testRecipe = new Recipe(testIngredientsList);
+			recipes.add(testRecipe);
+			testRecipe.startRecipe(300, 600);
+		}
+		{
+			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
+			var testIngredientsList = new Array<IngredientType>();
+			testIngredientsList.push(IngredientType.SALAD);
+			testRecipe = new Recipe(testIngredientsList);
+			recipes.add(testRecipe);
+			testRecipe.startRecipe(500, 600);
+		}
+		{
+			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
+			var testIngredientsList = new Array<IngredientType>();
+			testIngredientsList.push(IngredientType.SALAD);
+			testRecipe = new Recipe(testIngredientsList);
+			recipes.add(testRecipe);
+			testRecipe.startRecipe(700, 600);
+		}
+		add(recipes);
+		
+		for (i in 0...burgerSlots.length())
+		{
+			var bs : BurgerSlot = burgerSlots.getList().members[i];
+			bs.recipe = recipes.getList().members[i];
+		}
+		
+		
+		
+		
 		
 		scoreText = new FlxText(1024 - 200, 20, 180, "",24);
 		scoreText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
@@ -147,7 +184,7 @@ class PlayState extends BasicState
 		scoreText.update(elapsed);
 		
 
-		if (ingredients.length() != 0)
+		//if (ingredients.length() != 0)
 			//trace(ingredients.getList().members[0].x);
 		
 		IngredientSpawnTimer -= elapsed;
