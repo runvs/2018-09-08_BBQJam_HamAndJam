@@ -139,11 +139,11 @@ class PlayState extends BasicState
 		
 		
 		
-		scoreText = new FlxText(1024 - 200, 20, 180, "",24);
+		scoreText = new FlxText(1024 - 50, 20, 50, "",24);
 		scoreText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		
-		burgerIcon = new FlxSprite(1024 - 200 - 80, 20);
-		burgerIcon.loadGraphic(AssetPaths.bread_bottom_top__png, false);
+		burgerIcon = new FlxSprite(1024 - 50 - 60, 20);
+		burgerIcon.loadGraphic(AssetPaths.burger_counter__png, false);
 		
 		happy = new HappyFaces();
 		

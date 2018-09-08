@@ -21,7 +21,10 @@ class HappyFaces extends FlxObject
 		for (i in 0 ...3)
 		{
 			var f : FlxSprite = new FlxSprite(20 + 64 * i, 20);
-			f.makeGraphic(60, 60, true );
+			//f.makeGraphic(60, 60, true );
+			f.loadGraphic(AssetPaths.customer_ui__png, true, 53, 47);
+			f.animation.add("ok", [0], 30, true);
+			f.animation.add("no", [1], 30, true);
 			faces.push(f);
 		}
 	}
@@ -47,7 +50,8 @@ class HappyFaces extends FlxObject
 	public function Fail()
 	{
 		trace("fail");
-		faces[counter].color = FlxColor.RED;
+		//faces[counter].color = FlxColor.RED;
+		faces[counter].animation.play("no",true);
 		counter++;
 	}
 	
