@@ -1,4 +1,5 @@
 package;
+import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 
@@ -8,7 +9,6 @@ import flixel.group.FlxSpriteGroup;
  */
 class BurgerSlot extends Draggable 
 {
-	
 	private var ingredients : FlxTypedGroup<PlacedIngredient>;
 	private static var IngredientOffset : Float = 15;
 	
@@ -23,7 +23,6 @@ class BurgerSlot extends Draggable
 	
 	public function checkCanPlace (it : IngredientType) : Bool
 	{
-		
 		if (ingredients.length >= 1 && ingredients.members[ingredients.length - 1].getID() == IngredientType.BUN_TOP) return false;
 		
 		if (it == IngredientType.BUN_BOT)
@@ -35,8 +34,6 @@ class BurgerSlot extends Draggable
 		{
 			if (counter == 0) return false;
 		}
-		
-		
 		
 		if ( it == IngredientType.SAUCE)
 		{
@@ -52,8 +49,6 @@ class BurgerSlot extends Draggable
 	
 	public function addIngredientToStack (it: IngredientType)
 	{
-		
-		
 		if (it == IngredientType.SAUCE)
 		{
 			var i : PlacedIngredient = new PlacedIngredient(it, x, y );
@@ -69,7 +64,6 @@ class BurgerSlot extends Draggable
 		}
 		else
 		{
-			
 			counter += 1;
 			var i : PlacedIngredient = new PlacedIngredient(it, x, y );
 			i.offset.set(0, -( this.height - counter * IngredientOffset ));
@@ -96,5 +90,28 @@ class BurgerSlot extends Draggable
 		super.draw();
 		ingredients.draw();
 	}
+	
+	public function clearMyBurger()
+	{
+		for (ii in this.ingredients)
+		{
+			var i : PlacedIngredient = ii;
+			i.destroy();
+		}
+		ingredients.clear();
+		this.counter = 0;
+	}
+	
+	override function onDrop() 
+	{
+		super.onDrop();
+		
+		if (FlxG.overlap(_state.rubbish, this))
+		{
+			clearMyBurger();
+		}
+		
+	}
+	
 	
 }
