@@ -4,6 +4,7 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
 import flixel.math.FlxVector;
@@ -25,6 +26,8 @@ class PlayState extends BasicState
 	var lastTarget:String;	
 	
 	public var player : Player;
+	
+	public var ingredients : AdministratedList<Draggable>;
 
 	
 	
@@ -37,7 +40,11 @@ class PlayState extends BasicState
 		
 		trace("playstate create begin");
 		
+		player = new Player();
+		ingredients = new AdministratedList<Draggable>();
 		
+		var i : Draggable = new Draggable(300, 300);
+		ingredients.add(i);
 		
 	}
 
@@ -55,7 +62,8 @@ class PlayState extends BasicState
 	override public function drawObjects():Void 
 	{
 		super.drawObjects();
-		
+		player.draw();
+		ingredients.draw();
 		
 	}
 	
@@ -72,7 +80,8 @@ class PlayState extends BasicState
 	{
 		super.update(elapsed);
 		MyInput.update();
-
+		player.update(elapsed);
+		ingredients.update(elapsed);
 	}	
 
 }
