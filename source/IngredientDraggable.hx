@@ -12,8 +12,7 @@ class IngredientDraggable extends Draggable
 	public var myType : IngredientType;
 	
 	public var shouldBePosition : FlxPoint;
-	public var age : Float = 0;
-	
+
 	public static var beltSpeed : Float = 150;
 
 	public function new(?X:Float=0, ?Y:Float=0, s:PlayState, it : IngredientType) 
@@ -61,12 +60,40 @@ class IngredientDraggable extends Draggable
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-		age += elapsed;
+		
 		
 		
 		if (!lifted && canBeLifted)
 		{
 			x += beltSpeed * elapsed;
+			
+			var x1 : Float = 80;
+			var x2 : Float = 100;
+			var x3 : Float = 830;
+			var x4 : Float = 860;
+			if (x < x1)
+			{
+				this.alpha = 0;
+			}
+			else if (x < x2)
+			{
+				var v :Float = (x - x1) / (x2-x1);
+				this.alpha = v;
+			}
+			else if (x < x3)
+			{
+				this.alpha = 1;
+			}
+			else if (x < x4)
+			{
+				var v = 1 - ((x - x3) / (x4 - x3));
+				this.alpha = v;
+			}
+			else 
+			{
+				this.alpha = 0;
+			}
+			
 		}
 		
 		if (x >= FlxG.width + 300) this.alive = false;

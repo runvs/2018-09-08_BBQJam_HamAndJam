@@ -16,7 +16,9 @@ class Player extends FlxSprite
 	{
 		super();
 		
-		this.makeGraphic(32, 64);
+		//this.makeGraphic(32, 64);
+		this.loadGraphic(AssetPaths.Burger_guy_sheet__png, true, 25, 23);
+		//this.scale.set(5, 5);
 		this.animation.add("idle", [0], 8, true);
 		this.animation.add("yes", [0], 8, false);
 		this.animation.add("no", [0], 8, false);

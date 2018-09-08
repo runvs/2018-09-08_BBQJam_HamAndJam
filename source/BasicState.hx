@@ -35,7 +35,7 @@ class BasicState extends FlxState
 		
 		background = new FlxSprite(0, 0);
 		//background.makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(50, 50, 50));
-		background.loadGraphic(AssetPaths.mock__jpg, false);
+		background.loadGraphic(AssetPaths.mock__png, false);
 		background.scrollFactor.set();
 		
 		

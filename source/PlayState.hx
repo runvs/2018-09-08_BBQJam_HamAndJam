@@ -1,20 +1,19 @@
 package;
 
-import flixel.FlxCamera;
+
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.group.FlxSpriteGroup;
-import flixel.math.FlxPoint;
-import flixel.math.FlxVector;
-import flixel.system.debug.watch.Tracker;
+//import flixel.group.FlxGroup.FlxTypedGroup;
+//import flixel.group.FlxSpriteGroup;
+//import flixel.math.FlxPoint;
+//import flixel.math.FlxVector;
+//import flixel.system.debug.watch.Tracker;
 import flixel.text.FlxText;
-import flixel.tweens.FlxTween;
-import flixel.ui.FlxButton;
+//import flixel.tweens.FlxTween;
+//import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
-import flixel.math.FlxRandom;
-import flixel.util.FlxTimer;
+
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -44,6 +43,8 @@ class PlayState extends BasicState
 	private var burgerIcon : FlxSprite;
 	private var happy : HappyFaces;
 	
+	private var belt : FlxSprite;
+	
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -52,11 +53,22 @@ class PlayState extends BasicState
 	{
 		super.create();
 		
-		trace("playstate create begin");
+		//trace("playstate create begin");
+		
+		belt = new FlxSprite(220, 207);
+		belt.loadGraphic(AssetPaths.Forderband_v__png, true, 160, 25);
+		belt.animation.add("idle", [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5, true);
+		belt.animation.play("idle");
+		belt.origin.set();
+		belt.scale.set(5, 5);
+		
+		add(belt);
 		
 		player = new Player();
 		player.setPosition(500, 500);
 		add(player);
+		
+		
 		
 		ingredients = new AdministratedList<IngredientDraggable>();
 		
@@ -71,19 +83,19 @@ class PlayState extends BasicState
 
 		burgerSlots = new AdministratedList<BurgerSlot>();
 		{
-			var bs1 : BurgerSlot = new BurgerSlot(120, 440, this);
+			var bs1 : BurgerSlot = new BurgerSlot(140, 430, this);
 			burgerSlots.add(bs1);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(300, 440, this);
+			var bs : BurgerSlot = new BurgerSlot(340, 430, this);
 			burgerSlots.add(bs);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(550, 440, this);
+			var bs : BurgerSlot = new BurgerSlot(590, 430, this);
 			burgerSlots.add(bs);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(750, 440, this);
+			var bs : BurgerSlot = new BurgerSlot(790, 430, this);
 			burgerSlots.add(bs);
 		}
 		add(burgerSlots);
@@ -101,7 +113,7 @@ class PlayState extends BasicState
 			testIngredientsList.push(IngredientType.SALAD);
 			testRecipe = new Recipe(testIngredientsList);
 			recipes.add(testRecipe);
-			testRecipe.startRecipe(130, 600);
+			testRecipe.startRecipe(170, 600);
 		}
 		{
 			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
@@ -109,7 +121,7 @@ class PlayState extends BasicState
 			testIngredientsList.push(IngredientType.SALAD);
 			testRecipe = new Recipe(testIngredientsList);
 			recipes.add(testRecipe);
-			testRecipe.startRecipe(310, 600);
+			testRecipe.startRecipe(350, 600);
 		}
 		{
 			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
@@ -117,7 +129,7 @@ class PlayState extends BasicState
 			testIngredientsList.push(IngredientType.SALAD);
 			testRecipe = new Recipe(testIngredientsList);
 			recipes.add(testRecipe);
-			testRecipe.startRecipe(570, 600);
+			testRecipe.startRecipe(610, 600);
 		}
 		{
 			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
@@ -125,7 +137,7 @@ class PlayState extends BasicState
 			testIngredientsList.push(IngredientType.SALAD);
 			testRecipe = new Recipe(testIngredientsList);
 			recipes.add(testRecipe);
-			testRecipe.startRecipe(750, 600);
+			testRecipe.startRecipe(790, 600);
 		}
 		add(recipes);
 		
@@ -135,11 +147,7 @@ class PlayState extends BasicState
 			bs.recipe = recipes.getList().members[i];
 		}
 		
-		
-		
-		
-		
-		scoreText = new FlxText(1024 - 70, 20, 70, "",24);
+		scoreText = new FlxText(1024 - 70, 30, 70, "",24);
 		scoreText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		
 		burgerIcon = new FlxSprite(1024 - 70 - 60, 20);
@@ -197,7 +205,7 @@ class PlayState extends BasicState
 		recipes.update(elapsed);
 		happy.update(elapsed);
 		
-		if (happy.counter >= 2)
+		if (happy.counter >= 3)
 			EndGame();
 
 	}	
