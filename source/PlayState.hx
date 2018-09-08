@@ -74,7 +74,6 @@ class PlayState extends BasicState
 		testRecipe = new Recipe(testIngredientsList);
 		recipes.add(testRecipe);
 		testRecipe.startRecipe(10, 10);
-
 	}
 
 	
@@ -128,7 +127,7 @@ class PlayState extends BasicState
 	{
 		trace("spawn");
 		var arr :Array<IngredientType> = IngredientType.createAll();
-		var idx : Int = FlxG.random.int(0, arr.length);
+		var idx : Int = FlxG.random.int(0, arr.length-1);
 		
 		var i : IngredientDraggable = new IngredientDraggable( 0, 300, this, arr[idx]);
 		trace(ingredients.length());

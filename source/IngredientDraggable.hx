@@ -14,7 +14,7 @@ class IngredientDraggable extends Draggable
 	public var shouldBePosition : FlxPoint;
 	public var age : Float = 0;
 	
-	public static var beltSpeed : Float = 50;
+	public static var beltSpeed : Float = 150;
 
 	public function new(?X:Float=0, ?Y:Float=0, s:PlayState, it : IngredientType) 
 	{
@@ -27,9 +27,34 @@ class IngredientDraggable extends Draggable
 	
 	function TypeToGraphc() 
 	{
-		if (myType == IngredientType.SALAD)
+
+		if (myType == IngredientType.BUN_TOP)
 		{
-			this.makeGraphic(64, 64, FlxColor.GREEN);
+			this.loadGraphic(AssetPaths.bread_top_top__png, false);
+		}
+		else if (myType == IngredientType.BUN_BOT)
+		{
+			this.loadGraphic(AssetPaths.bread_bottom_top__png, false);
+		}
+		else if (myType == IngredientType.SALAD)
+		{
+			this.loadGraphic(AssetPaths.salad_top__png, false);
+		}
+		else if (myType == IngredientType.MEAT)
+		{
+			this.loadGraphic(AssetPaths.meat_top__png, false);
+		}
+		else if (myType == IngredientType.SAUCE)
+		{
+			this.loadGraphic(AssetPaths.sauce__png, false);
+		}
+		else if (myType == IngredientType.CHEESE)
+		{
+			this.loadGraphic(AssetPaths.cheese_top__png, false);
+		}
+		else
+		{
+			trace("WARNING: Unknown type: " + myType );
 		}
 	}
 	
@@ -43,6 +68,8 @@ class IngredientDraggable extends Draggable
 		{
 			x += beltSpeed * elapsed;
 		}
+		
+		if (x >= FlxG.width + 300) this.alive = false;
 	}
 	
 	
