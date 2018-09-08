@@ -129,7 +129,7 @@ class Recipe extends FlxSprite
 	 */
 	public function getIngredientsFinished(proposedIngredients:Array<PlacedIngredient>)
 	{
-		if (proposedIngredients[-1].getID() != IngredientType.BUN_TOP)
+		if (proposedIngredients[proposedIngredients.length-1].getID() != IngredientType.BUN_TOP)
 		{
 			trace("checking unfinished burger!");
 			return BurgerStatus.ERROR;
