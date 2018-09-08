@@ -49,6 +49,7 @@ class HappyFaces extends FlxObject
 	
 	public function Fail()
 	{
+		if (counter >= faces.length - 1) return;
 		trace("fail");
 		//faces[counter].color = FlxColor.RED;
 		faces[counter].animation.play("no",true);

@@ -57,43 +57,44 @@ class MenuState extends FlxState
 	
 		
 		var backgroundSprite : FlxSprite = new FlxSprite();
-		backgroundSprite.makeGraphic(FlxG.width, FlxG.height);
-		backgroundSprite.color = FlxColor.fromRGB(132,126,135);
+		//backgroundSprite.makeGraphic(FlxG.width, FlxG.height);
+		//backgroundSprite.color = FlxColor.fromRGB(132,126,135);
+		backgroundSprite.loadGraphic(AssetPaths.HamJam__png, false);
 		add(backgroundSprite);
 		
-		var spr : FlxSprite = new FlxSprite(300, 300);
-		spr.makeGraphic(50, 50, FlxColor.RED);
-		add(spr);
-		
-		var spr2 : FlxSprite = new FlxSprite(500, 300);
-		spr2.loadGraphic(AssetPaths.wallpopup__png, false);
-		add(spr2);
-	
-		
-		
-		var t1 : FlxText = new FlxText (100, 250, 500, "" , 14);
-		t1.text += Controls;
-		//t1.text += "Last Score: " + Std.string(LastScore) + "    HighScore: " + Std.string(HighScore);
-		t1.color = FlxColor.BLACK;
-		add(t1);
-		t1.offset.set(950,0);
-		FlxTween.tween(t1.offset, { x:0 }, 0.5, { ease : FlxEase.bounceOut, startDelay: 0.55 } );
-		
-		
-		
-		var t2 : FlxText = new FlxText (20, 300, 600, "", 10);
-		t2.text = "created by " + Authors + " for " + MyJam + "\n";
-		t2.text += MyDate + "\n"; 
-		t2.text += "visit us at https://runvs.io";
-		t2.y = FlxG.height - t2.height - 20;
-		t2.color = FlxColor.fromRGB(69,40,60);
-		add(t2);
-		t2.offset.set(0, -100);
-		FlxTween.tween(t2.offset, { y:0 }, 0.5, { ease : FlxEase.bounceOut, startDelay: 1.0 } );
-		
-		vignette = new Vignette(FlxG.camera);
-		add(vignette);
-		
+		//var spr : FlxSprite = new FlxSprite(300, 300);
+		//spr.makeGraphic(50, 50, FlxColor.RED);
+		//add(spr);
+		//
+		//var spr2 : FlxSprite = new FlxSprite(500, 300);
+		//spr2.loadGraphic(AssetPaths.wallpopup__png, false);
+		//add(spr2);
+	//
+		//
+		//
+		//var t1 : FlxText = new FlxText (100, 250, 500, "" , 14);
+		//t1.text += Controls;
+		////t1.text += "Last Score: " + Std.string(LastScore) + "    HighScore: " + Std.string(HighScore);
+		//t1.color = FlxColor.BLACK;
+		//add(t1);
+		//t1.offset.set(950,0);
+		//FlxTween.tween(t1.offset, { x:0 }, 0.5, { ease : FlxEase.bounceOut, startDelay: 0.55 } );
+		//
+		//
+		//
+		//var t2 : FlxText = new FlxText (20, 300, 600, "", 10);
+		//t2.text = "created by " + Authors + " for " + MyJam + "\n";
+		//t2.text += MyDate + "\n"; 
+		//t2.text += "visit us at https://runvs.io";
+		//t2.y = FlxG.height - t2.height - 20;
+		//t2.color = FlxColor.fromRGB(69,40,60);
+		//add(t2);
+		//t2.offset.set(0, -100);
+		//FlxTween.tween(t2.offset, { y:0 }, 0.5, { ease : FlxEase.bounceOut, startDelay: 1.0 } );
+		//
+		//vignette = new Vignette(FlxG.camera);
+		//add(vignette);
+		//
 		
 		overlay = new FlxSprite(0, 0);
 		overlay.makeGraphic(FlxG.width, FlxG.height);
