@@ -22,6 +22,11 @@ class BasicState extends FlxState
 
 	override public function create() 
 	{
+		
+		//background = new FlxSprite();
+	
+		
+		
 		overlay = new FlxSprite();
 		overlay.makeGraphic(FlxG.width, FlxG.height);
 		overlay.color = FlxColor.BLACK;
@@ -29,7 +34,8 @@ class BasicState extends FlxState
 		overlay.scrollFactor.set();
 		
 		background = new FlxSprite(0, 0);
-		background.makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(50, 50, 50));
+		//background.makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(50, 50, 50));
+		background.loadGraphic(AssetPaths.mock__jpg, false);
 		background.scrollFactor.set();
 		
 		

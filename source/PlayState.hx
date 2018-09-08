@@ -65,25 +65,25 @@ class PlayState extends BasicState
 		add(ingredients);
 
 		
-		rubbish = new FlxSprite(850, 600);
+		rubbish = new FlxSprite(900, 650);
 		rubbish.loadGraphic(AssetPaths.rubbish__png, false);
 		add(rubbish);
 
 		burgerSlots = new AdministratedList<BurgerSlot>();
 		{
-			var bs1 : BurgerSlot = new BurgerSlot(100, 400, this);
+			var bs1 : BurgerSlot = new BurgerSlot(120, 440, this);
 			burgerSlots.add(bs1);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(300, 400, this);
+			var bs : BurgerSlot = new BurgerSlot(300, 440, this);
 			burgerSlots.add(bs);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(500, 400, this);
+			var bs : BurgerSlot = new BurgerSlot(550, 440, this);
 			burgerSlots.add(bs);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(700, 400, this);
+			var bs : BurgerSlot = new BurgerSlot(750, 440, this);
 			burgerSlots.add(bs);
 		}
 		add(burgerSlots);
@@ -101,7 +101,7 @@ class PlayState extends BasicState
 			testIngredientsList.push(IngredientType.SALAD);
 			testRecipe = new Recipe(testIngredientsList);
 			recipes.add(testRecipe);
-			testRecipe.startRecipe(100, 600);
+			testRecipe.startRecipe(130, 600);
 		}
 		{
 			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
@@ -109,7 +109,7 @@ class PlayState extends BasicState
 			testIngredientsList.push(IngredientType.SALAD);
 			testRecipe = new Recipe(testIngredientsList);
 			recipes.add(testRecipe);
-			testRecipe.startRecipe(300, 600);
+			testRecipe.startRecipe(310, 600);
 		}
 		{
 			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
@@ -117,7 +117,7 @@ class PlayState extends BasicState
 			testIngredientsList.push(IngredientType.SALAD);
 			testRecipe = new Recipe(testIngredientsList);
 			recipes.add(testRecipe);
-			testRecipe.startRecipe(500, 600);
+			testRecipe.startRecipe(570, 600);
 		}
 		{
 			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
@@ -125,7 +125,7 @@ class PlayState extends BasicState
 			testIngredientsList.push(IngredientType.SALAD);
 			testRecipe = new Recipe(testIngredientsList);
 			recipes.add(testRecipe);
-			testRecipe.startRecipe(700, 600);
+			testRecipe.startRecipe(750, 600);
 		}
 		add(recipes);
 		
@@ -139,10 +139,10 @@ class PlayState extends BasicState
 		
 		
 		
-		scoreText = new FlxText(1024 - 50, 20, 50, "",24);
+		scoreText = new FlxText(1024 - 70, 20, 70, "",24);
 		scoreText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
 		
-		burgerIcon = new FlxSprite(1024 - 50 - 60, 20);
+		burgerIcon = new FlxSprite(1024 - 70 - 60, 20);
 		burgerIcon.loadGraphic(AssetPaths.burger_counter__png, false);
 		
 		happy = new HappyFaces();
@@ -246,7 +246,7 @@ class PlayState extends BasicState
 		}
 		
 		
-		var i : IngredientDraggable = new IngredientDraggable( -100, 300, this, arr[idx]);
+		var i : IngredientDraggable = new IngredientDraggable( -100, 240, this, arr[idx]);
 		trace(ingredients.length());
 		ingredients.add(i) ;
 		trace(ingredients.length());
