@@ -36,7 +36,14 @@ class Recipe extends FlxSprite
 	public var points : Int;
 
 	private static var ingredientArr :Array<IngredientType> = IngredientType.createAll();
+	
+	private var age : Float = 0;
 
+	
+	private var timer: HudBar;
+	
+	private var maxTime : Float = 0;
+	
 	public function new(?IngredientArray:Array<IngredientType>, ?rewardPoints:Int=1, ?maxRecipeTime:Float=30.0, ?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
@@ -50,14 +57,22 @@ class Recipe extends FlxSprite
 		}
 		points = rewardPoints;
 		recipeTime = maxRecipeTime;
+		
 		this.makeGraphic(100, 100, FlxColor.MAGENTA);
+		this.alpha = 0;
 		
 		recipeGraphics = new FlxSpriteGroup();
 		
 	}
 	
-	function loadMyGraphics() 
+	public function loadMyGraphics() 
 	{
+		
+		for (r in recipeGraphics)
+		{
+			r.destroy();
+		}
+		recipeGraphics.clear();
 		trace(ingredients.length);
 		var counter : Int = 0;
 		
@@ -93,15 +108,28 @@ class Recipe extends FlxSprite
 		recipeStarted = true;
 		this.setPosition(posX, posY);
 		loadMyGraphics();
+		timer = new HudBar(x, y, 64, 20, false,FlxColor.WHITE);
+		
 	}
 
 	override public function update(elapsed:Float)
 	{
+		timer.update(elapsed);
 		if (recipeStarted)
 		{
 			elapsedTime+=elapsed;
 		}
 		recipeGraphics.update(elapsed);
+		
+		
+		age += elapsed;
+		timer.health = age / maxTime;
+		if (age >= maxTime)
+		{
+			ingredients = createRecipe();
+			loadMyGraphics();
+			age = 0;
+		}
 	}
 
 	/*
@@ -189,16 +217,18 @@ class Recipe extends FlxSprite
 	{
 		super.draw();
 		recipeGraphics.draw();
+		timer.draw();
 	}
 
 	public function createRecipe()
 	{
+		maxTime = FlxG.random.float(30, 40);
 		var recArr : Array<IngredientType> = new Array<IngredientType>();
 		recArr.push(IngredientType.BUN_BOT);
 		var sauceAdded : Bool = false;
 		var newIngredient : Int;
 		// add random number of random stuff
-		for (i in 1...FlxG.random.int(1, 7))
+		for (i in 1...FlxG.random.int(2, 4))
 		{
 			if (sauceAdded)
 			{

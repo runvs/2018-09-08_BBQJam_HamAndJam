@@ -55,9 +55,9 @@ class PlayState extends BasicState
 		
 		//trace("playstate create begin");
 		
-		belt = new FlxSprite(220, 207);
+		belt = new FlxSprite(120, 207);
 		belt.loadGraphic(AssetPaths.Forderband_v__png, true, 160, 25);
-		belt.animation.add("idle", [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5, true);
+		belt.animation.add("idle", [0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10, true);
 		belt.animation.play("idle");
 		belt.origin.set();
 		belt.scale.set(5, 5);
@@ -108,34 +108,22 @@ class PlayState extends BasicState
 
 		recipes = new AdministratedList<Recipe>();
 		{
-			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
-			var testIngredientsList = new Array<IngredientType>();
-			testIngredientsList.push(IngredientType.SALAD);
-			testRecipe = new Recipe(testIngredientsList);
+			testRecipe = new Recipe(null);
 			recipes.add(testRecipe);
 			testRecipe.startRecipe(170, 600);
 		}
 		{
-			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
-			var testIngredientsList = new Array<IngredientType>();
-			testIngredientsList.push(IngredientType.SALAD);
-			testRecipe = new Recipe(testIngredientsList);
+			testRecipe = new Recipe(null);
 			recipes.add(testRecipe);
 			testRecipe.startRecipe(350, 600);
 		}
 		{
-			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
-			var testIngredientsList = new Array<IngredientType>();
-			testIngredientsList.push(IngredientType.SALAD);
-			testRecipe = new Recipe(testIngredientsList);
+			testRecipe = new Recipe(null);
 			recipes.add(testRecipe);
 			testRecipe.startRecipe(610, 600);
 		}
 		{
-			var testIngredient = new PlacedIngredient(IngredientType.SALAD);
-			var testIngredientsList = new Array<IngredientType>();
-			testIngredientsList.push(IngredientType.SALAD);
-			testRecipe = new Recipe(testIngredientsList);
+			testRecipe = new Recipe(null);
 			recipes.add(testRecipe);
 			testRecipe.startRecipe(790, 600);
 		}
