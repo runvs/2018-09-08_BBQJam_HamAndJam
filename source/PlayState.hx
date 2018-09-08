@@ -37,6 +37,8 @@ class PlayState extends BasicState
 	private static var DefaultIngredientSpawnTimer : Float = 1.5;
 	private var IngredientSpawnTimer : Float = 0;
 	
+	public var rubbish : FlxSprite;
+	
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -54,22 +56,26 @@ class PlayState extends BasicState
 		//ingredients.add(i);
 		add(ingredients);
 
+		
+		rubbish = new FlxSprite(850, 600);
+		rubbish.loadGraphic(AssetPaths.rubbish__png, false);
+		add(rubbish);
 
 		burgerSlots = new AdministratedList<BurgerSlot>();
 		{
-			var bs1 : BurgerSlot = new BurgerSlot(200, 600, this);
+			var bs1 : BurgerSlot = new BurgerSlot(100, 600, this);
 			burgerSlots.add(bs1);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(400, 600, this);
+			var bs : BurgerSlot = new BurgerSlot(300, 600, this);
 			burgerSlots.add(bs);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(600, 600, this);
+			var bs : BurgerSlot = new BurgerSlot(500, 600, this);
 			burgerSlots.add(bs);
 		}
 		{
-			var bs : BurgerSlot = new BurgerSlot(800, 600, this);
+			var bs : BurgerSlot = new BurgerSlot(700, 600, this);
 			burgerSlots.add(bs);
 		}
 		add(burgerSlots);

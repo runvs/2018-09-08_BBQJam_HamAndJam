@@ -1,4 +1,5 @@
 package;
+import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 
@@ -96,5 +97,22 @@ class BurgerSlot extends Draggable
 		super.draw();
 		ingredients.draw();
 	}
+	
+	override function onDrop() 
+	{
+		super.onDrop();
+		
+		if (FlxG.overlap(_state.rubbish, this))
+		{
+			for (ii in this.ingredients)
+			{
+				var i : PlacedIngredient = ii;
+				i.destroy();
+			}
+		}
+		ingredients.clear();
+		this.counter = 0;
+	}
+	
 	
 }
