@@ -30,6 +30,9 @@ class PlayState extends BasicState
 	public var ingredients : AdministratedList<IngredientDraggable>;
 	public var burgerSlots : AdministratedList<BurgerSlot>;
 
+	public var recipes : AdministratedList<Recipe>;
+
+	private var testRecipe:Recipe;
 	
 	private static var DefaultIngredientSpawnTimer : Float = 1.5;
 	private var IngredientSpawnTimer : Float = 0;
@@ -50,7 +53,7 @@ class PlayState extends BasicState
 		//var i : IngredientDraggable = new IngredientDraggable(300, 300, this, IngredientType.SALAD);
 		//ingredients.add(i);
 		add(ingredients);
-		
+
 
 		burgerSlots = new AdministratedList<BurgerSlot>();
 		var bs : BurgerSlot = new BurgerSlot(300, 500, this);
@@ -62,6 +65,15 @@ class PlayState extends BasicState
 		var testIngredientsList = new Array<IngredientType>();
 		testIngredientsList.push(IngredientType.SALAD);
 		var testRecipe = new Recipe(testIngredientsList);
+
+
+		recipes = new AdministratedList<Recipe>();
+		var testIngredient = new PlacedIngredient(IngredientType.SALAD);
+		var testIngredientsList = new Array<IngredientType>();
+		testIngredientsList.push(IngredientType.SALAD);
+		testRecipe = new Recipe(testIngredientsList);
+		recipes.add(testRecipe);
+		testRecipe.startRecipe(10, 10);
 
 	}
 
@@ -97,7 +109,7 @@ class PlayState extends BasicState
 		MyInput.update();
 		player.update(elapsed);
 
-		//trace(ingredients.length());
+
 		if (ingredients.length() != 0)
 			trace(ingredients.getList().members[0].x);
 		
@@ -107,6 +119,9 @@ class PlayState extends BasicState
 			IngredientSpawnTimer = DefaultIngredientSpawnTimer;
 			SpawnIngredient();
 		}
+
+		recipes.update(elapsed);
+
 	}	
 	
 	function SpawnIngredient() 
