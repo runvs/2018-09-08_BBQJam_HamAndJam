@@ -10,10 +10,6 @@ import flixel.util.FlxSpriteUtil;
 import flixel.FlxState;
 import flixel.text.FlxText;
 
-#if (flash)
-import kong.Kongregate;
-import kong.KongregateApi;
-#end
 
 /**
  * A FlxState which can be used for the game's menu.
@@ -57,7 +53,7 @@ class MenuState extends FlxState
 	{
 		super.create();
 	
-		FlxG.mouse.visible = false;
+		//FlxG.mouse.visible = false;
 	
 		
 		var backgroundSprite : FlxSprite = new FlxSprite();

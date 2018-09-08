@@ -30,9 +30,11 @@ class AdministratedList<T:FlxObject> extends FlxObject
 	
 	override public function update(elapsed:Float):Void 
 	{
-		cleanUp();
+		//trace("list.update");
+		
 		super.update(elapsed);
 		list.update(elapsed);
+		cleanUp();
 		
 	}
 
@@ -46,15 +48,21 @@ class AdministratedList<T:FlxObject> extends FlxObject
 		var l : FlxTypedGroup<T> = new FlxTypedGroup<T>();
 		for (i in list)
 		{
-			if (i.alive) l.add(i);
+			if (i.active == true)
+			{
+				l.add(i);
+			}
 			else
 			{
+				//trace("dead");
 				for (d in DestroyCallBack)
 				{
 					d(i);
+					i.destroy();
 				}
 			}
 		}
+		list.clear();
 		list = l;
 	}
 	

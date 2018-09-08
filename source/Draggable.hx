@@ -24,7 +24,7 @@ class Draggable extends FlxSprite
 
 	public function new(?X:Float=0, ?Y:Float=0, s: PlayState) 
 	{
-		super();
+		super(X,Y);
 		_state = s;
 		//this.makeGraphic(64, 64);
 		pickupPoint = new FlxPoint(0, 0);
@@ -51,7 +51,10 @@ class Draggable extends FlxSprite
 	
 	override public function update(elapsed:Float):Void 
 	{
+		//trace("update");
+		
 		super.update(elapsed);
+		
 		
 		if (canBeLifted && ! lifted)
 		{
