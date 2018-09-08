@@ -65,7 +65,7 @@ class PlayState extends BasicState
 		add(belt);
 		
 		player = new Player();
-		player.setPosition(500, 500);
+		player.setPosition(500, 430);
 		add(player);
 		
 		

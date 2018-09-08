@@ -72,6 +72,8 @@ class BurgerSlot extends Draggable
 			i.offset.set(0, -( this.height - (counter * IngredientOffset) -8));
 			ingredients.add(i);
 			
+			_state.player.sayYes();
+			
 			_state.checkBurgerOk(this);
 			recipe.ingredients = recipe.createRecipe();
 			recipe.loadMyGraphics();
