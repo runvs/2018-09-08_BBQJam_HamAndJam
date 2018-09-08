@@ -1,7 +1,7 @@
 package;
 
 import flixel.FlxSprite;
-import flixel.system.FlxAssets.FlxGraphicAsset;
+
 
 /**
  * ...
@@ -17,6 +17,9 @@ class Player extends FlxSprite
 		super();
 		
 		this.makeGraphic(32, 64);
+		this.animation.add("idle", [0], 8, true);
+		this.animation.add("yes", [0], 8, false);
+		this.animation.add("no", [0], 8, false);
 		
 		this.maxVelocity.set(500, 0);
 		this.drag.set(3000, 3000);
@@ -25,16 +28,16 @@ class Player extends FlxSprite
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
-		if (MyInput.xVal < 0 )
-		{
-			this.acceleration.set( -moveAcc, 0);
-		}
-		else if (MyInput.xVal > 0)
-		{
-			this.acceleration.set( moveAcc, 0);
-		}
-		else
-			this.acceleration.set();
+
 	}
 	
+	public function sayYes()
+	{
+		this.animation.play("yes");
+	}
+	
+	public function sayNo()
+	{
+		this.animation.play("no");
+	}
 }

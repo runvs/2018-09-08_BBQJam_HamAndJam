@@ -39,6 +39,10 @@ class PlayState extends BasicState
 	
 	public var rubbish : FlxSprite;
 	
+	public var score : Int = 0;
+	private var scoreText : FlxText;
+	private var burgerIcon : FlxSprite;
+	
 	
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -50,6 +54,9 @@ class PlayState extends BasicState
 		trace("playstate create begin");
 		
 		player = new Player();
+		//player.setPosition(
+		add(player);
+		
 		ingredients = new AdministratedList<IngredientDraggable>();
 		
 		//var i : IngredientDraggable = new IngredientDraggable(300, 300, this, IngredientType.SALAD);
@@ -93,6 +100,13 @@ class PlayState extends BasicState
 		testRecipe = new Recipe(testIngredientsList);
 		recipes.add(testRecipe);
 		testRecipe.startRecipe(10, 10);
+		
+		scoreText = new FlxText(1024 - 200, 20, 180, "",24);
+		scoreText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 1, 1);
+		
+		burgerIcon = new FlxSprite(1024 - 200 - 80, 20);
+		burgerIcon.loadGraphic(AssetPaths.bread_bottom_top__png, false);
+		
 	}
 
 	
@@ -109,13 +123,13 @@ class PlayState extends BasicState
 	override public function drawObjects():Void 
 	{
 		super.drawObjects();
-		player.draw();
 		
 	}
 	
 	override public function drawOverlay():Void 
 	{
-		
+		burgerIcon.draw();
+		scoreText.draw();
 	}
 	
 	/**
@@ -124,9 +138,9 @@ class PlayState extends BasicState
 	override public function update(elapsed : Float):Void
 	{
 		super.update(elapsed);
-		MyInput.update();
-		player.update(elapsed);
-
+		scoreText.text = Std.string(score);
+		scoreText.update(elapsed);
+		
 
 		if (ingredients.length() != 0)
 			trace(ingredients.getList().members[0].x);
@@ -142,13 +156,50 @@ class PlayState extends BasicState
 
 	}	
 	
+	public function checkBurgerOk(bs:BurgerSlot) 
+	{
+		// TODO
+		
+		//FlxTween.tween(
+		bs.clearMyBurger();
+		score++;
+	}
+	
 	function SpawnIngredient() 
 	{
 		trace("spawn");
+		
+		
 		var arr :Array<IngredientType> = IngredientType.createAll();
 		var idx : Int = FlxG.random.int(0, arr.length-1);
+		var zeroBurgerSlots : Int = 0;
+		for (i in burgerSlots)
+		{
+			var bs : BurgerSlot = i;
+			if (bs.counter == 0)
+			zeroBurgerSlots++;
+		}
+		if (zeroBurgerSlots >= 3)
+		{
+			idx = 1;
+		}
+		else if (zeroBurgerSlots <= 2)
+		{
+			if (idx == 1 && FlxG.random.bool())
+			{
+				idx == 0;
+			}
+		}
+		else if (zeroBurgerSlots == 0)
+		{
+			if (idx == 1)
+			{
+				idx = FlxG.random.int(0, arr.length - 1, [1]);
+			}
+		}
 		
-		var i : IngredientDraggable = new IngredientDraggable( 0, 300, this, arr[idx]);
+		
+		var i : IngredientDraggable = new IngredientDraggable( -100, 300, this, arr[idx]);
 		trace(ingredients.length());
 		ingredients.add(i) ;
 		trace(ingredients.length());

@@ -12,7 +12,7 @@ class BurgerSlot extends Draggable
 	private var ingredients : FlxTypedGroup<PlacedIngredient>;
 	private static var IngredientOffset : Float = 15;
 	
-	private var counter : Int = 0;
+	public var counter : Int = 0;
 
 	public function new(?X:Float=0, ?Y:Float=0, s:PlayState) 
 	{
@@ -61,6 +61,9 @@ class BurgerSlot extends Draggable
 			var i : PlacedIngredient = new PlacedIngredient(it, x, y );
 			i.offset.set(0, -( this.height - (counter * IngredientOffset) -8));
 			ingredients.add(i);
+			
+			_state.checkBurgerOk(this);
+			
 		}
 		else
 		{

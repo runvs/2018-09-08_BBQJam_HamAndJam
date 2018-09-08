@@ -86,6 +86,7 @@ class IngredientDraggable extends Draggable
 				{
 					bs.addIngredientToStack(this.myType);
 					active = false;
+					
 				}
 				
 			}
