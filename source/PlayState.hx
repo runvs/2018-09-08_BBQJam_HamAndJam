@@ -42,6 +42,7 @@ class PlayState extends BasicState
 	public var score : Int = 0;
 	private var scoreText : FlxText;
 	private var burgerIcon : FlxSprite;
+	private var happy : HappyFaces;
 	
 	
 	/**
@@ -54,7 +55,7 @@ class PlayState extends BasicState
 		trace("playstate create begin");
 		
 		player = new Player();
-		//player.setPosition(
+		player.setPosition(500, 500);
 		add(player);
 		
 		ingredients = new AdministratedList<IngredientDraggable>();
@@ -107,6 +108,8 @@ class PlayState extends BasicState
 		burgerIcon = new FlxSprite(1024 - 200 - 80, 20);
 		burgerIcon.loadGraphic(AssetPaths.bread_bottom_top__png, false);
 		
+		happy = new HappyFaces();
+		
 	}
 
 	
@@ -130,7 +133,9 @@ class PlayState extends BasicState
 	{
 		burgerIcon.draw();
 		scoreText.draw();
+		happy.draw();
 	}
+	
 	
 	/**
 	 * Function that is called once every frame.
@@ -143,7 +148,7 @@ class PlayState extends BasicState
 		
 
 		if (ingredients.length() != 0)
-			trace(ingredients.getList().members[0].x);
+			//trace(ingredients.getList().members[0].x);
 		
 		IngredientSpawnTimer -= elapsed;
 		if (IngredientSpawnTimer <= 0)
@@ -153,6 +158,10 @@ class PlayState extends BasicState
 		}
 
 		recipes.update(elapsed);
+		happy.update(elapsed);
+		
+		if (happy.counter >= 2)
+			EndGame();
 
 	}	
 	
@@ -162,6 +171,7 @@ class PlayState extends BasicState
 		
 		//FlxTween.tween(
 		bs.clearMyBurger();
+		happy.Fail();
 		score++;
 	}
 	
