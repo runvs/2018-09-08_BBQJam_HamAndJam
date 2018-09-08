@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import flixel.FlxG;
 
 /**
  * ...
@@ -27,10 +28,19 @@ class Recipe extends FlxSprite
 	private var elapsedTime : Float = 0;
 	public var points : Int;
 
-	public function new(IngredientArray:Array<IngredientType>, ?rewardPoints:Int=1, ?maxRecipeTime:Float=30.0, ?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
+	private static var ingredientArr :Array<IngredientType> = IngredientType.createAll();
+
+	public function new(?IngredientArray:Array<IngredientType>, ?rewardPoints:Int=1, ?maxRecipeTime:Float=30.0, ?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
 	{
 		super(X, Y, SimpleGraphic);
-		ingredients = IngredientArray;
+		if (IngredientArray == null)
+		{
+			ingredients = createRecipe();
+		}
+		else
+		{
+			ingredients = IngredientArray;
+		}
 		points = rewardPoints;
 		recipeTime = maxRecipeTime;
 	}
@@ -128,5 +138,47 @@ class Recipe extends FlxSprite
 			}
 		}
 		return currentState;
+	}
+
+	public function createRecipe(){
+		var recArr : Array<IngredientType> = new Array<IngredientType>();
+		recArr.push(IngredientType.BUN_BOT);
+		var sauceAdded : Bool = false;
+		var newIngredient : Int;
+		// add random number of random stuff
+		for (i in 1...FlxG.random.int(1, 7))
+		{
+			if (sauceAdded)
+			{
+				newIngredient = FlxG.random.int(2, ingredientArr.length-2);
+			}
+			else
+			{
+				newIngredient = FlxG.random.int(2, ingredientArr.length-1);
+				if (newIngredient == ingredientArr.length-1)
+				{
+					sauceAdded = true;
+				}
+			}
+			switch newIngredient
+			{
+				case 2:
+					recArr.push(IngredientType.MEAT);
+				case 3:
+					recArr.push(IngredientType.SALAD);
+				case 4:
+					recArr.push(IngredientType.CHEESE);
+				case 5:
+					recArr.push(IngredientType.SAUCE);
+				default:
+					trace("Unknown ingredient value "+newIngredient);
+			}
+		}
+		recArr.push(IngredientType.BUN_TOP);
+		for (i in recArr)
+		{
+			trace("next ingredient"+i);
+		}
+		return recArr;
 	}
 }
