@@ -63,6 +63,9 @@ class Recipe extends FlxSprite
 		
 		recipeGraphics = new FlxSpriteGroup();
 		
+		//hotfix
+		loadMyGraphics();
+		timer = new HudBar(x, y, 64, 20, false,FlxColor.WHITE);
 	}
 	
 	public function loadMyGraphics() 
@@ -109,7 +112,7 @@ class Recipe extends FlxSprite
 		this.setPosition(posX, posY);
 		loadMyGraphics();
 		timer = new HudBar(x, y, 64, 20, false,FlxColor.WHITE);
-		
+
 	}
 
 	override public function update(elapsed:Float)

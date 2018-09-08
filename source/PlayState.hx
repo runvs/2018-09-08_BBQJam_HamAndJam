@@ -143,58 +143,6 @@ class PlayState extends BasicState
 		
 		happy = new HappyFaces();
 		
-		var testIngredient = new PlacedIngredient(IngredientType.SALAD);
-		//var testIngredientsList = new Array<IngredientType>();
-		//testIngredientsList.push(IngredientType.SALAD);
-		var testingx = [
-					IngredientType.BUN_BOT,
-					IngredientType.SALAD,
-					IngredientType.CHEESE,
-					IngredientType.BUN_TOP];
-		var testings = [
-					new PlacedIngredient(IngredientType.BUN_BOT),
-					new PlacedIngredient(IngredientType.SALAD),
-					new PlacedIngredient(IngredientType.CHEESE),
-					new PlacedIngredient(IngredientType.BUN_TOP)];
-					   
-		var checkings1 = [
-					new PlacedIngredient(IngredientType.BUN_BOT),
-					new PlacedIngredient(IngredientType.SALAD),
-					new PlacedIngredient(IngredientType.CHEESE),
-					new PlacedIngredient(IngredientType.CHEESE)];
-
-		var checkings2 = [
-					new PlacedIngredient(IngredientType.BUN_BOT),
-					new PlacedIngredient(IngredientType.CHEESE),
-					new PlacedIngredient(IngredientType.BUN_TOP)];
-
-		var checkings3 = [
-					new PlacedIngredient(IngredientType.BUN_BOT),
-					new PlacedIngredient(IngredientType.SALAD),
-					new PlacedIngredient(IngredientType.SALAD),
-					new PlacedIngredient(IngredientType.CHEESE),
-					new PlacedIngredient(IngredientType.BUN_TOP)];
-
-		var checkings4 = [
-					new PlacedIngredient(IngredientType.BUN_BOT),
-					new PlacedIngredient(IngredientType.CHEESE),
-					new PlacedIngredient(IngredientType.CHEESE),
-					new PlacedIngredient(IngredientType.BUN_TOP)];
-
-		var testRec0 = new Recipe(testingx);
-		trace("should work:"+testRec0.getIngredientsFinished(testings));
-		trace("should fail (no top bun):"+testRec0.getIngredientsFinished(checkings1));
-		trace("should fail (not finished):"+testRec0.getIngredientsFinished(checkings2));
-		trace("should fail (too many):"+testRec0.getIngredientsFinished(checkings3));
-		trace("should fail (wrong ingredients):"+testRec0.getIngredientsFinished(checkings4));
-
-		testRecipe = new Recipe();//testIngredientsList);
-		recipes.add(testRecipe);
-		recipes.add(new Recipe());
-		recipes.add(new Recipe());
-		recipes.add(new Recipe());
-		testRecipe.startRecipe(10, 10);
-
 	}
 
 	
